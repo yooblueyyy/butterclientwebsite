@@ -1,45 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prime.Client Mod Menu (Now Butter.Client)</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #1a1a1a;
-            color: #fff;
-            text-align: center;
-            padding: 50px;
-        }
-        h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
-        }
-        .button {
-            background-color: #007bff;
-            color: white;
-            font-size: 1.2em;
-            padding: 15px 30px;
-            margin: 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-        }
-        .button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Butter</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+    body {
+      background: #0a0a0a;
+      color: #fff;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+    header {
+      width: 100%;
+      padding: 20px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      transition: 0.3s ease;
+    }
+    header h1 {
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      color: #6a00ff;
+    }
+    header nav a {
+      margin-left: 30px;
+      color: #aaa;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s ease;
+    }
+    header nav a:hover {
+      color: #fff;
+      transform: scale(1.05);
+    }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+      background: linear-gradient(to bottom, rgba(10,10,10,0.8), rgba(10,10,10,0.95)), url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1950&q=80');
+      background-size: cover;
+      background-position: center;
+      animation: fadeIn 1.5s ease-out;
+    }
+    .hero h2 {
+      font-size: 4rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      color: #fff;
+      text-shadow: 0 0 20px rgba(106,0,255,0.6);
+    }
+    .hero p {
+      margin-top: 20px;
+      font-size: 1.4rem;
+      color: #ccc;
+      max-width: 650px;
+      line-height: 1.6;
+      animation: fadeInUp 1.8s ease-out;
+    }
+    .hero button {
+      margin-top: 40px;
+      padding: 18px 40px;
+      border: none;
+      font-size: 1.2rem;
+      font-weight: 700;
+      border-radius: 15px;
+      background: linear-gradient(135deg, #6a00ff, #8b2aff);
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(106,0,255,0.4);
+      transition: 0.3s ease;
+    }
+    .hero button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 35px rgba(106,0,255,0.5);
+    }
+
+    .section {
+      padding: 140px 50px;
+      text-align: center;
+      position: relative;
+    }
+    .section h3 {
+      font-size: 3rem;
+      margin-bottom: 50px;
+      font-weight: 900;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+    }
+    .card {
+      background: rgba(255,255,255,0.05);
+      padding: 35px;
+      border-radius: 25px;
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    .card:hover {
+      transform: translateY(-10px) scale(1.02);
+      background: rgba(255,255,255,0.07);
+      box-shadow: 0 15px 40px rgba(106,0,255,0.3);
+    }
+    .card h4 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: #6a00ff;
+    }
+    .card p {
+      color: #ccc;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    footer {
+      padding: 60px;
+      text-align: center;
+      color: #aaa;
+      font-size: 0.95rem;
+      position: relative;
+      z-index: 10;
+    }
+    .discord-button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 15px 35px;
+      background: linear-gradient(135deg, #7289da, #5b6eae);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(114,137,218,0.4);
+      transition: 0.3s ease;
+    }
+    .discord-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 35px rgba(114,137,218,0.5);
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+  </style>
 </head>
 <body>
 
-    <h1>Welcome to Prime.Client Mod Menu</h1>
-    <p>Your next-level modding experience starts here. Get the menu and join the community!</p>
+<header>
+  <h1>Butter Client</h1>
+  <nav>
+    <a href="#features">Features</a>
+    <a href="#download">Download</a>
+    <a href="#about">About</a>
+  </nav>
+</header>
 
-    <a href="https://discord.gg/6veuZuWZhW" class="button">Join Our Discord</a>
-    <br>
-    <a href="" class="button" download>Download Mod Menu</a>
+<section class="hero">
+  <h2>The BEST Gorilla Tag Mod Menu</h2>
+  <p>Experience Gorilla Tag like never before with our safe-to-use menu.</p>
+  <button href="https://discord.gg/6veuZuWZhW">Download Now</button>
+</section>
 
+<section class="section" id="features">
+  <h3>Features</h3>
+  <div class="cards">
+    <div class="card">
+      <h4>Movement</h4>
+      <p>We have movement mods, including joystick fly, platforms, and more!</p>
+    </div>
+    <div class="card">
+      <h4>Visuals</h4>
+      <p>We have many visual mods, including ESP, weather mods, and a LOT more!</p>
+    </div>
+    <div class="card">
+      <h4>Optimization</h4>
+      <p>We have the best optimization for smooth gameplay.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="download">
+  <h3>Download</h3>
+  <button style="margin-top:30px; padding: 18px 45px; background: linear-gradient(135deg, #6a00ff, #8b2aff); border-radius: 15px; border: none; color: #fff; font-size: 1.2rem; cursor:pointer;" href="https://discord.gg/xgsRfyCBpW">Download</button>
+</section>
+
+<section class="section" id="about">
+  <h3>About</h3>
+  <p>This project is designed purely for fun and customization. We aim to bring a modern, aesthetic UI experience to Gorilla Tag modding.</p>
+</section>
+
+<footer>
+  <p>© 2025 Butter Client. All Rights Reserved.</p>
+  <a href="https://discord.gg/6veuZuWZhW" class="discord-button" target="_blank">Join Discord</a>
+</footer>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"aeb53ba17c02456496ec60f7715770bf","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
